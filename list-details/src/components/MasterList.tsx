@@ -5,11 +5,13 @@ import { ItemsList } from "./ItemsList";
 import { AddItem } from "./AddItem";
 
 export const MasterList = () => {
-  let items = [ { id: 1, name: "Item 1" , details: "This is an example Item"}, { id: 2, name: "Item 2", details: "This is an example Item" } ];
+  let items = [ { id: 1, name: "Item 1" , details: "an example Item"}, { id: 2, name: "Item 2", details: "This is an example Item" } ];
 
   const [listIndex, setListIndex] = React.useState(0);
 
-  const handleListClick = () => {}
+  const handleListClick = (item:number) => {
+    setListIndex(item);
+  }
 
   const handleDelete = () => {}
   // the onclick event from the list item sends back target index for the details
@@ -18,7 +20,7 @@ export const MasterList = () => {
     <>
       <FilterList />
       <ItemsList list={items} handleClick={handleListClick} />
-      <ListItemDetails list={items} targetIndex={listIndex} handleDelete={handleListClick}/>
+      <ListItemDetails list={items} targetIndex={listIndex} handleDelete={handleDelete}/>
       <AddItem />
     </>
   );
