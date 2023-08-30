@@ -7,7 +7,7 @@ export const ListItemDetails = (props: {
   return (
     <>
       <p>{props.targetItem.details}</p>
-      <button onClick={() => {props.handleDelete()}}>Delete</button>
+      <button onClick={() => {props.handleDelete()}} disabled={props.targetItem.id === 0 ? true : false}>Delete</button>
     </>
     // takes in the list and and index and displays the details of the item at that index
     // there is a button that will delete the item at that index
