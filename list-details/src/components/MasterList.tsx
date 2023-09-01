@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListItemDetails } from "./ListItemDetails";
 import { FilterList } from "./FilterList";
 import { ItemsList } from "./ItemsList";
@@ -14,31 +14,24 @@ export const MasterList = () => {
   const [items, setItems] = useState<IListItem[]>(i);
   const [filteredItems, setFilteredItems] = useState<IListItem[]>(i);
   const [detailItem, setDetailItem] = useState<IListItem>(i[0]);
-  const [isFilter, setIsFilter] = useState<boolean>(false);
+  const [filterStr, setFilterStr] = useState<string>("");
 
   const handleListClick = (item: IListItem) => {
     setDetailItem(item);
   };
 
   const handleOnFilterChange = (targteStr: string) => {
-    let newList = items.filter((item) => {
-      return item.details.includes(targteStr);
-    });
-    if (targteStr === "") {
-      setIsFilter(false);
-    }
-    if (newList.length === 0) {
-      setIsFilter(() => true);
-      setFilteredItems(() => [
-        { id: 0, name: "No Items", details: "nothing here" },
-      ]);
-      setDetailItem(() => filteredItems[0]);
-    } else {
-      setFilteredItems(newList);
-      setDetailItem(newList[0]);
-      setIsFilter(true);
-    }
+    setFilterStr(targteStr);
+    setDetailItem(filteredItems[0]);
   };
+
+  useEffect(() => {
+      setFilteredItems(
+        items.filter((item) => {
+          return item.details.toLowerCase().includes(filterStr.toLowerCase());
+        })
+      );
+  }, [items, filterStr]);
 
   const handleDelete = () => {
     let newList = items.filter((item) => {
@@ -51,8 +44,6 @@ export const MasterList = () => {
   const handleAdd = (item: IListItem) => {
     setItems([...items, { ...item, id: items.length + 1 }]);
   };
-  // the onclick event from the list item sends back target index for the details
-  // the onclick/delete event from the details the item at the index.
   if (items.length === 0) {
     return (
       <>
@@ -66,10 +57,7 @@ export const MasterList = () => {
   return (
     <>
       <FilterList handleOnChange={handleOnFilterChange} />
-      <ItemsList
-        list={isFilter ? filteredItems : items}
-        handleClick={handleListClick}
-      />
+      <ItemsList list={filteredItems} handleClick={handleListClick} />
       <ListItemDetails targetItem={detailItem} handleDelete={handleDelete} />
       <AddItem handleAdd={handleAdd} />
     </>

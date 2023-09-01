@@ -1,14 +1,22 @@
-import { MouseEventHandler } from "react";
+import { FC } from "react";
 import IListItem from "../interfaces/IListItem";
 
-export const ItemsList = (props: { list: IListItem[]; handleClick: (item:IListItem) => void }) => {
-
+export const ItemsList: FC<{
+  list: IListItem[];
+  handleClick: (item: IListItem) => void;
+}> = ({ list, handleClick }) => {
   return (
     <div>
-      {props.list.map((item:IListItem) => (
-        <button key={item.id} onClick={() => {props.handleClick(item)}}>{item.name}</button>
+      {list.map((item: IListItem) => (
+        <div className="btn"
+          key={item.id}
+          onClick={() => {
+            handleClick(item);
+          }}
+        >
+          {item.name}
+        </div>
       ))}
     </div>
   );
-
 };

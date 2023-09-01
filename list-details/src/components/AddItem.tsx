@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import IListItem from "../interfaces/IListItem";
 
-export const AddItem = (props: { handleAdd: (item: IListItem) => void }) => {
+export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
+  handleAdd,
+}) => {
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.handleAdd(itemInfo);
+    handleAdd(itemInfo);
   };
 
-  const handleChange = (value: string ,name: string) => {
+  const handleChange = (value: string, name: string) => {
     setItemInfo((prevState) => {
       return {
         ...prevState,
         [name]: value,
       };
-    }); 
+    });
   };
 
   const [itemInfo, setItemInfo] = useState<IListItem>({
@@ -41,9 +44,7 @@ export const AddItem = (props: { handleAdd: (item: IListItem) => void }) => {
           placeholder="Details"
           onChange={(e) => handleChange(e.target.value, "details")}
         />
-        <button type="submit">
-          Add
-        </button>
+        <button type="submit">Add</button>
       </form>
     </>
   );
