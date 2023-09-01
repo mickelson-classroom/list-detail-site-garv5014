@@ -9,15 +9,14 @@ export const FilterList: FC<{
     handleOnChange(filterString);
   }, [filterString]);
 
-  // Declare a state variable...
-  // ...
+  
   return (
     <input
-      value={filterString} // ...force the input's value to match the state variable...
+      value={filterString} 
       onChange={(e) => {
         setFilterString(e.target.value);
       }}
-      placeholder="Search" // ... and update the state variable on any edits!
+      placeholder="Search" 
     />
   );
 };
