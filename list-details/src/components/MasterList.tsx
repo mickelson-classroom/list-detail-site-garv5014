@@ -38,36 +38,19 @@ export const MasterList = () => {
       return item.id !== detailItem?.id;
     });
     setItems(newList);
-    setDetailItem(newList[0]);
+    setDetailItem(undefined);
   };
 
   const handleAdd = (item: IListItem) => {
     setItems([...items, { ...item, id: items.length + 1 }]);
   };
-  if (items.length === 0) {
-    return (
-      <>
-        <FilterList handleOnChange={handleOnFilterChange} />
-        <AddItem handleAdd={handleAdd} />
-        <p>No Items left</p>
-      </>
-    );
-  }
 
   return (
-    <div className="container">
-      <div className="col">
+    <div className="d-flex flex-column justify-content-center">
         <FilterList handleOnChange={handleOnFilterChange} />
-      </div>
-      <div className="col">
-        <ItemsList list={filteredItems} handleClick={handleListClick} />
-      </div>
-      <div className="col">
-        <ListItemDetails targetItem={detailItem} handleDelete={handleDelete} />
-      </div>
-      <div className="col">
-        <AddItem handleAdd={handleAdd} />
-      </div>
+      <ItemsList list={filteredItems} handleClick={handleListClick} />
+      <ListItemDetails targetItem={detailItem} handleDelete={handleDelete} />
+      <AddItem handleAdd={handleAdd} />
     </div>
   );
 };

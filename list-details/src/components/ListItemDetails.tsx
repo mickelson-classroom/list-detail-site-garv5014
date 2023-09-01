@@ -6,7 +6,7 @@ export const ListItemDetails: FC<{
   handleDelete: () => void;
 }> = ({ targetItem, handleDelete }) => {
   return (
-    <>
+    <div>
       {targetItem?.details && <p>{targetItem?.details}</p>}
       <button
         onClick={() => {
@@ -16,7 +16,7 @@ export const ListItemDetails: FC<{
       >
         Delete
       </button>
-    </>
+    </div>
     // takes in the list and and index and displays the details of the item at that index
     // there is a button that will delete the item at that index
   );

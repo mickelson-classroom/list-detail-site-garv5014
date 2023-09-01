@@ -6,15 +6,18 @@ export const ItemsList: FC<{
   handleClick: (item: IListItem) => void;
 }> = ({ list, handleClick }) => {
   return (
-    <div>
+    <div className="container">
       {list.map((item: IListItem) => (
-        <div className="btn"
-          key={item.id}
-          onClick={() => {
-            handleClick(item);
-          }}
-        >
-          {item.name}
+        <div className="row">
+          <div
+            className="btn"
+            key={item.id}
+            onClick={() => {
+              handleClick(item);
+            }}
+          >
+            {item.name}
+          </div>
         </div>
       ))}
     </div>
