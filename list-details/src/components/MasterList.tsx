@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ListItemDetails } from "./ListItemDetails";
 import { FilterList } from "./FilterList";
 import { ItemsList } from "./ItemsList";
@@ -13,7 +13,7 @@ export const MasterList = () => {
 
   const [items, setItems] = useState<IListItem[]>(i);
   const [filteredItems, setFilteredItems] = useState<IListItem[]>(i);
-  const [detailItem, setDetailItem] = useState<IListItem>(i[0]);
+  const [detailItem, setDetailItem] = useState<IListItem | undefined>(i[0]);
   const [filterStr, setFilterStr] = useState<string>("");
 
   const handleListClick = (item: IListItem) => {
@@ -22,20 +22,20 @@ export const MasterList = () => {
 
   const handleOnFilterChange = (targteStr: string) => {
     setFilterStr(targteStr);
-    setDetailItem(filteredItems[0]);
+    setDetailItem(undefined);
   };
 
   useEffect(() => {
-      setFilteredItems(
-        items.filter((item) => {
-          return item.details.toLowerCase().includes(filterStr.toLowerCase());
-        })
-      );
+    setFilteredItems(
+      items.filter((item) => {
+        return item.name.toLowerCase().includes(filterStr.toLowerCase());
+      })
+    );
   }, [items, filterStr]);
 
   const handleDelete = () => {
     let newList = items.filter((item) => {
-      return item.id !== detailItem.id;
+      return item.id !== detailItem?.id;
     });
     setItems(newList);
     setDetailItem(newList[0]);
@@ -55,11 +55,19 @@ export const MasterList = () => {
   }
 
   return (
-    <>
-      <FilterList handleOnChange={handleOnFilterChange} />
-      <ItemsList list={filteredItems} handleClick={handleListClick} />
-      <ListItemDetails targetItem={detailItem} handleDelete={handleDelete} />
-      <AddItem handleAdd={handleAdd} />
-    </>
+    <div className="container">
+      <div className="col">
+        <FilterList handleOnChange={handleOnFilterChange} />
+      </div>
+      <div className="col">
+        <ItemsList list={filteredItems} handleClick={handleListClick} />
+      </div>
+      <div className="col">
+        <ListItemDetails targetItem={detailItem} handleDelete={handleDelete} />
+      </div>
+      <div className="col">
+        <AddItem handleAdd={handleAdd} />
+      </div>
+    </div>
   );
 };

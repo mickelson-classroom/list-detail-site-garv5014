@@ -17,7 +17,7 @@ export const FilterList: FC<{
       onChange={(e) => {
         setFilterString(e.target.value);
       }}
-      placeholder="Word to filter" // ... and update the state variable on any edits!
+      placeholder="Search" // ... and update the state variable on any edits!
     />
   );
 };

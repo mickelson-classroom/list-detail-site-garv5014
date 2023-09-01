@@ -2,17 +2,17 @@ import { FC } from "react";
 import IListItem from "../interfaces/IListItem";
 
 export const ListItemDetails: FC<{
-  targetItem: IListItem;
+  targetItem: IListItem | undefined;
   handleDelete: () => void;
 }> = ({ targetItem, handleDelete }) => {
   return (
     <>
-      <p>{targetItem.details}</p>
+      {targetItem?.details && <p>{targetItem?.details}</p>}
       <button
         onClick={() => {
           handleDelete();
         }}
-        disabled={targetItem.id === 0 ? true : false}
+        disabled={!targetItem?.id}
       >
         Delete
       </button>
