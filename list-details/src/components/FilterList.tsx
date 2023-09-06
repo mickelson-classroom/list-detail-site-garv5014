@@ -5,18 +5,21 @@ export const FilterList: FC<{
 }> = ({ handleOnChange }) => {
   const [filterString, setFilterString] = useState("");
 
-  useEffect(() => { 
+  useEffect(() => {
     handleOnChange(filterString);
   }, [filterString]);
 
-  
   return (
-    <input
-      value={filterString} 
-      onChange={(e) => {
-        setFilterString(e.target.value);
-      }}
-      placeholder="Search" 
-    />
+    <div className="container">
+      <div className="row">
+        <input
+          value={filterString}
+          onChange={(e) => {
+            setFilterString(e.target.value);
+          }}
+          placeholder="Search"
+        />
+      </div>
+    </div>
   );
 };
