@@ -9,7 +9,7 @@ export const ListItemDetails: FC<{
     <div className="container">
       <div className="row">
         {targetItem?.details && <p>{targetItem?.details}</p>}
-        <button
+        <button className="btn btn-danger"
           onClick={() => {
             handleDelete();
           }}

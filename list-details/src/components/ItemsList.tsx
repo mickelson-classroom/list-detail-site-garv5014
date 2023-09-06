@@ -10,7 +10,7 @@ export const ItemsList: FC<{
       {list.map((item: IListItem) => (
         <div className="row">
           <div
-            className="btn"
+            className="btn btn-outline-primary"
             key={item.id}
             onClick={() => {
               handleClick(item);
