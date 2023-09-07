@@ -56,7 +56,7 @@ export const MasterList = () => {
             handleDelete={handleDelete}
           />
         </div>
-        <div className="col-lg-6 col-xl-4 col-md-4 col-sm-12 mx-auto">
+        <div className="col-lg-5 col-xl-4 col-md-4 col-sm-6 mx-auto col-6">
           <AddItem handleAdd={handleAdd} />
         </div>
       </div>
