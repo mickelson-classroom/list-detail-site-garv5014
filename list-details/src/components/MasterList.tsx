@@ -47,10 +47,19 @@ export const MasterList = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center">
-      <FilterList handleOnChange={handleOnFilterChange} />
-      <ItemsList list={filteredItems} handleClick={handleListClick} />
-      <ListItemDetails targetItem={detailItem} handleDelete={handleDelete}/>
-      <AddItem handleAdd={handleAdd} />
+      <div className="row justify-content-center">
+        <div className="col-lg-6 col">
+          <FilterList handleOnChange={handleOnFilterChange} />
+          <ItemsList list={filteredItems} handleClick={handleListClick} />
+          <ListItemDetails
+            targetItem={detailItem}
+            handleDelete={handleDelete}
+          />
+        </div>
+        <div className="col-lg-6 col">
+          <AddItem handleAdd={handleAdd} />
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,9 +6,9 @@ export const ItemsList: FC<{
   handleClick: (item: IListItem) => void;
 }> = ({ list, handleClick }) => {
   return (
-    <div className="container">
+    <div className="container mt-4">
       {list.map((item: IListItem) => (
-        <div className="row">
+        <div className="row mb-4">
           <div
             className="btn btn-outline-primary"
             key={item.id}
