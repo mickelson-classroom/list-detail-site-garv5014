@@ -24,27 +24,31 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     details: "",
   });
   return (
-      <div className="row mx-auto">
-        <h2 >Add new Item</h2>
-        <form onSubmit={handleSubmit} className="form">
-          <label htmlFor="Item Name"></label>
-          <input
-            type="text"
-            name="itemName"
-            value={itemInfo?.name}
-            placeholder="Name"
-            onChange={(e) => handleChange(e.target.value, "name")}
-          />
-          <label htmlFor="Item Details"></label>
-          <input
-            type="text"
-            name="itemDetails"
-            value={itemInfo?.details}
-            placeholder="Details"
-            onChange={(e) => handleChange(e.target.value, "details")}
-          />
-          <button type="submit">Add</button>
-        </form>
-      </div>
+    <div className="row mx-auto">
+      <h2>Add new Item</h2>
+      <form onSubmit={handleSubmit} className="form">
+        <label htmlFor="Item Name"></label>
+        <input
+          type="text"
+          name="itemName"
+          className="form-control"
+          value={itemInfo?.name}
+          placeholder="Name"
+          onChange={(e) => handleChange(e.target.value, "name")}
+        />
+        <label htmlFor="Item Details"></label>
+        <input
+          type="text"
+          name="itemDetails"
+          className="form-control mb-4"
+          value={itemInfo?.details}
+          placeholder="Details"
+          onChange={(e) => handleChange(e.target.value, "details")}
+        />
+        <button type="submit" className="btn btn-primary ">
+          Add
+        </button>
+      </form>
+    </div>
   );
 };
