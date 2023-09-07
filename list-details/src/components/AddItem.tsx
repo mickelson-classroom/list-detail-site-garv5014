@@ -24,7 +24,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     details: "",
   });
   return (
-    <div className="row mx-auto">
+    <div className="row">
       <h2>Add new Item</h2>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="Item Name" className="form-label h4 mt-2">Name</label>

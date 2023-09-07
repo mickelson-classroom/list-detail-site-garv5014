@@ -46,9 +46,9 @@ export const MasterList = () => {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-center">
+    <div className="grid grid justify-content-center m-4">
       <div className="row justify-content-center">
-        <div className="col-lg-6 col-md-8 col-sm-12 ">
+        <div className="col-lg-6 col-xl-4 col-md-8 col-sm-12 mx-auto">
           <FilterList handleOnChange={handleOnFilterChange} />
           <ItemsList list={filteredItems} handleClick={handleListClick} />
           <ListItemDetails
@@ -56,7 +56,7 @@ export const MasterList = () => {
             handleDelete={handleDelete}
           />
         </div>
-        <div className="col-lg-6 col-md-4 col-sm-12">
+        <div className="col-lg-6 col-xl-4 col-md-4 col-sm-12 mx-auto">
           <AddItem handleAdd={handleAdd} />
         </div>
       </div>

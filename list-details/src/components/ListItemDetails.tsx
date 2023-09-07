@@ -8,8 +8,8 @@ export const ListItemDetails: FC<{
   return (
     <div className="container">
       <div className="row justify-content-center">
-        {targetItem?.details && <p className=" col h3 mt-4 mb-4">{targetItem?.details}</p>}
-        <button className="col btn btn-danger mt-4 mb-4"
+        {targetItem?.details && <p className=" h3 mt-4 mb-4">{targetItem?.details}</p>}
+        <button className="btn btn-danger mt-4 mb-4"
           onClick={() => {
             handleDelete();
           }}
