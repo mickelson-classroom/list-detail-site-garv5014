@@ -9,13 +9,13 @@ import { AddItemModal } from "./AddItemModal";
 export const MasterList = () => {
   let i = [
     {
-      id: 1,
+      id: crypto.randomUUID(),
       name: "Item 1",
       details: "an example Item",
       owners: ["owner 1", "owner 2"],
     },
     {
-      id: 2,
+      id: crypto.randomUUID(),
       name: "Item 2",
       details: "This is an example Item",
       owners: ["owner 1", "owner 2"],
@@ -24,7 +24,7 @@ export const MasterList = () => {
 
   const [items, setItems] = useState<IListItem[]>(i);
   const [filteredItems, setFilteredItems] = useState<IListItem[]>(i);
-  const [detailItem, setDetailItem] = useState<IListItem | undefined>(i[0]);
+  const [detailItem, setDetailItem] = useState<IListItem>(i[0]);
   const [filterStr, setFilterStr] = useState<string>("");
 
   const handleListClick = (item: IListItem) => {
@@ -33,7 +33,52 @@ export const MasterList = () => {
 
   const handleOnFilterChange = (targteStr: string) => {
     setFilterStr(targteStr);
-    setDetailItem(undefined);
+    setDetailItem({
+      id: crypto.randomUUID(),
+      name: "",
+      details: "",
+      owners: [],
+    });
+  };
+
+  const handleDelete = () => {
+    let newList = items.filter((item) => {
+      return item.id !== detailItem?.id;
+    });
+    setItems(newList);
+    setDetailItem({
+      id: crypto.randomUUID(),
+      name: "",
+      details: "",
+      owners: [],
+    });
+  };
+
+  const handleAddItem = (item: IListItem) => {
+    if (item?.name) {
+      setItems([...items, { ...item, id: crypto.randomUUID() }]);
+    } else {
+      alert("Please enter a name for the item");
+    }
+  };
+
+  const handleAddOwner = (owner: string) => {
+    if (owner) {
+      setItems(
+        items.map((item) => {
+          if (item.id === detailItem?.id) {
+            return {
+              ...item,
+              owners: [...item.owners, owner],
+            };
+          } else {
+            return item;
+          }
+        })
+      );
+    } else {
+      alert("Please enter a name for the owner");
+    }
   };
 
   useEffect(() => {
@@ -43,27 +88,6 @@ export const MasterList = () => {
       })
     );
   }, [items, filterStr]);
-
-  const handleDelete = () => {
-    let newList = items.filter((item) => {
-      return item.id !== detailItem?.id;
-    });
-    setItems(newList);
-    setDetailItem(undefined);
-  };
-
-  const handleAddItem = (item: IListItem) => {
-    if (item?.name) {
-      setItems([...items, { ...item, id: items.length + 1 }]);
-    }
-    else{
-      alert("Please enter a name for the item")
-    }
-  };
-
-  const handleAddOwner = (owner: string) => { 
-
-  }
 
   return (
     <div className="grid grid justify-content-center m-4">

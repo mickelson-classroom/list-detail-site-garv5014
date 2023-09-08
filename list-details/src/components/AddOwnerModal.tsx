@@ -1,10 +1,20 @@
 import { DisabledByDefault } from "@mui/icons-material";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
-export const AddOwnerModal: FC<{ handleAddOwner: (owner: string) => void; disable: boolean}> = ({
-  handleAddOwner,
-  disable
-}) => {
+export const AddOwnerModal: FC<{
+  handleAddOwner: (owner: string) => void;
+  disable: boolean;
+}> = ({ handleAddOwner, disable }) => {
+  const handleChange = (value: string) => {
+    setOwnerName(value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleAddOwner(ownerName);
+  };
+  const [ownerName, setOwnerName] = useState<string>("");
+
   return (
     <>
       <button
@@ -36,10 +46,20 @@ export const AddOwnerModal: FC<{ handleAddOwner: (owner: string) => void; disabl
               ></button>
             </div>
             <div className="modal-body">
-              <form>
-                <label htmlFor="ownerName" className="form-label h4 mt-2">Owner Name</label>
-                <input type="text" className="form-control" id="ownerName" placeholder="Owner Name" />
-                <button type="submit" className="btn btn-primary mt-4">Add</button>
+              <form className="form" onSubmit={handleSubmit}>
+                <label htmlFor="ownerName" className="form-label h4 mt-2">
+                  Owner Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="ownerName"
+                  placeholder="Owner Name"
+                  onChange={(e) => handleChange(e.target.value)}
+                />
+                <button type="submit" className="btn btn-primary mt-4">
+                  Add
+                </button>
               </form>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { AddItem } from "./AddItem";
 import IListItem from "../interfaces/IListItem";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 
 export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
   handleAdd,
@@ -12,9 +12,9 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target="#modal"
+        data-bs-target="#addItemModal"
       >
-        <AddIcon/>
+        <AddIcon />
       </button>
       <div
         className="modal fade"
@@ -22,7 +22,6 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-      <div className="modal">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -39,7 +38,6 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
             </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );

@@ -19,7 +19,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   };
 
   const [itemInfo, setItemInfo] = useState<IListItem>({
-    id: 0,
+    id: crypto.randomUUID(),
     name: "",
     details: "",
     owners: [],
@@ -27,7 +27,9 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   return (
     <div className="row">
       <form onSubmit={handleSubmit} className="form">
-        <label htmlFor="Item Name" className="form-label h4 mt-2">Name</label>
+        <label htmlFor="Item Name" className="form-label h4 mt-2">
+          Name
+        </label>
         <input
           type="text"
           name="itemName"
@@ -36,7 +38,9 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           placeholder="Name"
           onChange={(e) => handleChange(e.target.value, "name")}
         />
-        <label htmlFor="Item Details" className="form-label h4 mt-2">Details</label>
+        <label htmlFor="Item Details" className="form-label h4 mt-2">
+          Details
+        </label>
         <input
           type="text"
           name="itemDetails"

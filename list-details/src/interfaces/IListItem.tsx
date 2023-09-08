@@ -1,5 +1,5 @@
 export default interface IListItem {
-    id: number;
+    id: string;
     name: string;
     details: string;
     owners: string[];
