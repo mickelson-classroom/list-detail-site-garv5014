@@ -12,10 +12,16 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target=".modal"
+        data-bs-target="#modal"
       >
         <AddIcon/>
       </button>
+      <div
+        className="modal fade"
+        id="addItemModal"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
       <div className="modal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -33,6 +39,7 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import IListItem from "../interfaces/IListItem";
 import { OwnerCard } from "./OwnerCards";
+import { AddOwnerModal } from "./AddOwnerModal";
 
 export const ListItemDetails: FC<{
   targetItem: IListItem | undefined;
   handleDelete: () => void;
   owners?: string[];
-}> = ({ targetItem, handleDelete, owners }) => {
+  handleAddOwner: (owner: string) => void;
+}> = ({ targetItem, handleDelete, owners, handleAddOwner }) => {
 
   const [itemOwners, setItemOwners] = useState<string[]>(owners || []);
 
@@ -15,13 +17,13 @@ export const ListItemDetails: FC<{
   }, [targetItem]);
   return (
     <div className="container">
-      <div className="row justify-content-center">
+      <div className="row justify-content-evenly">
         {targetItem?.details && (
           <p className=" h3 mt-4 mb-4">{targetItem?.details}</p>
         )}
         {targetItem?.owners && <OwnerCard owners={itemOwners} />}
         <button
-          className="btn btn-danger mt-4 mb-4"
+          className="btn btn-danger mt-4 mb-4 col"
           onClick={() => {
             handleDelete();
           }}
@@ -29,6 +31,7 @@ export const ListItemDetails: FC<{
         >
           Delete
         </button>
+        <AddOwnerModal handleAddOwner={handleAddOwner} disable={!targetItem?.id} />
       </div>
     </div>
     // takes in the list and and index and displays the details of the item at that index

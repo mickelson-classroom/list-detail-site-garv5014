@@ -52,9 +52,18 @@ export const MasterList = () => {
     setDetailItem(undefined);
   };
 
-  const handleAdd = (item: IListItem) => {
-    setItems([...items, { ...item, id: items.length + 1 }]);
+  const handleAddItem = (item: IListItem) => {
+    if (item?.name) {
+      setItems([...items, { ...item, id: items.length + 1 }]);
+    }
+    else{
+      alert("Please enter a name for the item")
+    }
   };
+
+  const handleAddOwner = (owner: string) => { 
+
+  }
 
   return (
     <div className="grid grid justify-content-center m-4">
@@ -66,11 +75,12 @@ export const MasterList = () => {
             targetItem={detailItem}
             owners={detailItem?.owners || []}
             handleDelete={handleDelete}
+            handleAddOwner={handleAddOwner}
           />
         </div>
 
         <div className="col-lg-5 col-xl-4 col-md-4 col-sm-6 mx-auto col-6">
-          <AddItemModal handleAdd={handleAdd} />
+          <AddItemModal handleAdd={handleAddItem} />
         </div>
       </div>
     </div>
