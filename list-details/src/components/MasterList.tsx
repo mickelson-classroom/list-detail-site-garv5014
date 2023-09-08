@@ -64,18 +64,19 @@ export const MasterList = () => {
 
   const handleAddOwner = (owner: string) => {
     if (owner) {
-      setItems(
-        items.map((item) => {
-          if (item.id === detailItem?.id) {
-            return {
-              ...item,
-              owners: [...item.owners, owner],
-            };
-          } else {
-            return item;
-          }
-        })
-      );
+      const item = {
+        id: detailItem.id,
+        name: detailItem.name,
+        details: detailItem.details,
+        owners: [...detailItem.owners, owner],
+      };
+      setItems([
+        ...items.filter((item) => {
+          return item.id !== detailItem?.id;
+        }),
+        item,
+      ]);
+      setDetailItem(item);
     } else {
       alert("Please enter a name for the owner");
     }
