@@ -4,11 +4,22 @@ import { FilterList } from "./FilterList";
 import { ItemsList } from "./ItemsList";
 import { AddItem } from "./AddItem";
 import IListItem from "../interfaces/IListItem";
+import { AddItemModal } from "./AddItemModal";
 
 export const MasterList = () => {
   let i = [
-    { id: 1, name: "Item 1", details: "an example Item" },
-    { id: 2, name: "Item 2", details: "This is an example Item" },
+    {
+      id: 1,
+      name: "Item 1",
+      details: "an example Item",
+      owners: ["owner 1", "owner 2"],
+    },
+    {
+      id: 2,
+      name: "Item 2",
+      details: "This is an example Item",
+      owners: ["owner 1", "owner 2"],
+    },
   ];
 
   const [items, setItems] = useState<IListItem[]>(i);
@@ -53,11 +64,13 @@ export const MasterList = () => {
           <ItemsList list={filteredItems} handleClick={handleListClick} />
           <ListItemDetails
             targetItem={detailItem}
+            owners={detailItem?.owners || []}
             handleDelete={handleDelete}
           />
         </div>
+
         <div className="col-lg-5 col-xl-4 col-md-4 col-sm-6 mx-auto col-6">
-          <AddItem handleAdd={handleAdd} />
+          <AddItemModal handleAdd={handleAdd} />
         </div>
       </div>
     </div>

@@ -22,10 +22,10 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     id: 0,
     name: "",
     details: "",
+    owners: [],
   });
   return (
     <div className="row">
-      <h2>Add new Item</h2>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="Item Name" className="form-label h4 mt-2">Name</label>
         <input

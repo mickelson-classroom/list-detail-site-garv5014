@@ -1,15 +1,27 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import IListItem from "../interfaces/IListItem";
+import { OwnerCard } from "./OwnerCards";
 
 export const ListItemDetails: FC<{
   targetItem: IListItem | undefined;
   handleDelete: () => void;
-}> = ({ targetItem, handleDelete }) => {
+  owners?: string[];
+}> = ({ targetItem, handleDelete, owners }) => {
+
+  const [itemOwners, setItemOwners] = useState<string[]>(owners || []);
+
+  useEffect(() => { 
+    setItemOwners(targetItem?.owners || []);
+  }, [targetItem]);
   return (
     <div className="container">
       <div className="row justify-content-center">
-        {targetItem?.details && <p className=" h3 mt-4 mb-4">{targetItem?.details}</p>}
-        <button className="btn btn-danger mt-4 mb-4"
+        {targetItem?.details && (
+          <p className=" h3 mt-4 mb-4">{targetItem?.details}</p>
+        )}
+        {targetItem?.owners && <OwnerCard owners={itemOwners} />}
+        <button
+          className="btn btn-danger mt-4 mb-4"
           onClick={() => {
             handleDelete();
           }}
