@@ -5,6 +5,7 @@ import { ItemsList } from "./ItemsList";
 import { AddItem } from "./AddItem";
 import IListItem from "../interfaces/IListItem";
 import { AddItemModal } from "./AddItemModal";
+import { EditItemForm } from "./EditItemForm";
 
 export const MasterList = () => {
   const genericItem = {
@@ -20,7 +21,7 @@ export const MasterList = () => {
   const i = [
     {
       id: crypto.randomUUID(),
-      Name: "Item 1",
+      Name: "Task 1",
       Details: "an example Item",
       "Est Hrs": 0,
       "Date Created": new Date(Date.now()).toDateString(),
@@ -30,7 +31,7 @@ export const MasterList = () => {
     },
     {
       id: crypto.randomUUID(),
-      Name: "Item 2",
+      Name: "Task 2",
       Details: "This is an example Item",
       "Est Hrs": 0,
       "Date Created": "",
@@ -44,9 +45,21 @@ export const MasterList = () => {
   const [filteredItems, setFilteredItems] = useState<IListItem[]>(i);
   const [detailItem, setDetailItem] = useState<IListItem>(i[0]);
   const [filterStr, setFilterStr] = useState<string>("");
+  const [editCurrentItem, setEditCurrentItem] = useState<boolean>(false);
 
   const handleListClick = (item: IListItem) => {
     setDetailItem(item);
+  };
+
+  const handleEditItem = (item: IListItem) => {
+    setItems([
+      ...items.filter((item) => {
+        return item.id !== detailItem?.id;
+      }),
+      item,
+    ]);
+    setDetailItem(item);
+    setEditCurrentItem(!editCurrentItem);
   };
 
   const handleOnFilterChange = (targteStr: string) => {
@@ -69,9 +82,11 @@ export const MasterList = () => {
   };
 
   const handleAddItem = (item: IListItem) => {
-    if (item?.Name) {
-      setItems([...items, { ...item, id: crypto.randomUUID() }]);
-    }
+    setItems([...items, { ...item, id: crypto.randomUUID() }]);
+  };
+
+  const toggleEdit = () => {
+    setEditCurrentItem(!editCurrentItem);
   };
 
   const handleAddOwner = (owner: string) => {
@@ -107,21 +122,40 @@ export const MasterList = () => {
   }, [items, filterStr]);
 
   return (
-    <div className="grid grid justify-content-center m-4">
-      <div className="row justify-content-center">
-        <div className="col-lg-6 col-xl-4 col-md-8 col-sm-12 mx-auto">
+    <div className="grid m-4">
+      <div className="row align-items-center justify-content-evenly">
+        <div className=" col-4 col-lg-6">
+          <AddItemModal handleAdd={handleAddItem} />
+        </div>
+        <div className=" col-4 ">
           <FilterList handleOnChange={handleOnFilterChange} />
+        </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-lg-6 col-xl-4 col-md-4 col-sm-12 mx-auto">
           <ItemsList list={filteredItems} handleClick={handleListClick} />
-          <ListItemDetails
-            targetItem={detailItem}
-            owners={detailItem?.owners || []}
-            handleDelete={handleDelete}
-            handleAddOwner={handleAddOwner}
-          />
         </div>
 
-        <div className="col-lg-5 col-xl-4 col-md-4 col-sm-6 mx-auto col-6">
-          <AddItemModal handleAdd={handleAddItem} />
+        <div className="col-lg-5 col-xl-4 col-md-8 col-sm-8 mx-auto col-6 mt-4">
+          {(detailItem?.Details ||
+            detailItem?.["Date Created"] ||
+            detailItem?.["Due Date"]) &&
+            (editCurrentItem ? (
+              <>
+                <EditItemForm
+                  item={detailItem}
+                  handleEdit={handleEditItem}
+                  toggleEdit={toggleEdit}
+                />
+              </>
+            ) : (
+              <ListItemDetails
+                targetItem={detailItem}
+                handleDelete={handleDelete}
+                handleAddOwner={handleAddOwner}
+                toggleEdit={toggleEdit}
+              />
+            ))}
         </div>
       </div>
     </div>

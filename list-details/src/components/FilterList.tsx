@@ -10,16 +10,18 @@ export const FilterList: FC<{
   }, [filterString]);
 
   return (
-    <div className="container">
-      <div className="row">
-        <input
-          value={filterString}
-          onChange={(e) => {
-            setFilterString(e.target.value);
-          }}
-          placeholder="Search"
-        />
-      </div>
-    </div>
+    <>
+      <label htmlFor="filter" className="form-label h4 mt-2">
+        Filter:
+      </label>
+      <input
+        id="filter"
+        value={filterString}
+        onChange={(e) => {
+          setFilterString(e.target.value);
+        }}
+        placeholder="Filter"
+      />
+    </>
   );
 };
