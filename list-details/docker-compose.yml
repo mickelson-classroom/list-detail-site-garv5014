@@ -4,24 +4,23 @@ services:
     build: .
     ports:
       - 80:80
-      
+
   gSwagger:
     image: lscr.io/linuxserver/swag
     container_name: gSwagger
     cap_add:
       - NET_ADMIN
     env_file:
-    - .env
+      - .env
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Denver
-      - URL=myawesometictactoe
+      - URL=myawesometictactoe.duckdns.org
       - VALIDATION=duckdns
-      - STAGING=true
+      - STAGING=false
     volumes:
       - /home/garrett/data/swag:/config
       - ./default.conf:/config/nginx/site-confs/default.conf # new part
     ports:
-    - 0.0.0.0:3000:443
-    restart: unless-stopped
+      - 0.0.0.0:3000:443
