@@ -122,40 +122,42 @@ export const MasterList = () => {
   }, [items, filterStr]);
 
   return (
-    <div className="grid m-4">
-      <div className="row align-items-center justify-content-evenly">
-        <div className=" col-4 col-lg-6">
-          <AddItemModal handleAdd={handleAddItem} />
+    <div className="container">
+      <div className="grid m-4 ">
+        <div className="row align-items-center justify-content-evenly">
+          <div className=" col-4 col-lg-6">
+            <AddItemModal handleAdd={handleAddItem} />
+          </div>
+          <div className=" col-4 ">
+            <FilterList handleOnChange={handleOnFilterChange} />
+          </div>
         </div>
-        <div className=" col-4 ">
-          <FilterList handleOnChange={handleOnFilterChange} />
-        </div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-lg-6 col-xl-4 col-md-4 col-sm-12 mx-auto">
-          <ItemsList list={filteredItems} handleClick={handleListClick} />
-        </div>
+        <div className="row justify-content-center">
+          <div className="col-lg-6 col-xl-4 col-md-4 col-sm-12 mx-auto">
+            <ItemsList list={filteredItems} handleClick={handleListClick} />
+          </div>
 
-        <div className="col-lg-5 col-xl-4 col-md-8 col-sm-8 mx-auto col-6 mt-4">
-          {(detailItem?.Details ||
-            detailItem?.["Date Created"] ||
-            detailItem?.["Due Date"]) &&
-            (editCurrentItem ? (
-              <>
-                <EditItemForm
-                  item={detailItem}
-                  handleEdit={handleEditItem}
+          <div className="col-lg-5 col-xl-4 col-md-8 col-sm-8 mx-auto col-6 mt-4">
+            {(detailItem?.Details ||
+              detailItem?.["Date Created"] ||
+              detailItem?.["Due Date"]) &&
+              (editCurrentItem ? (
+                <>
+                  <EditItemForm
+                    item={detailItem}
+                    handleEdit={handleEditItem}
+                    toggleEdit={toggleEdit}
+                  />
+                </>
+              ) : (
+                <ListItemDetails
+                  targetItem={detailItem}
+                  handleDelete={handleDelete}
+                  handleAddOwner={handleAddOwner}
                   toggleEdit={toggleEdit}
                 />
-              </>
-            ) : (
-              <ListItemDetails
-                targetItem={detailItem}
-                handleDelete={handleDelete}
-                handleAddOwner={handleAddOwner}
-                toggleEdit={toggleEdit}
-              />
-            ))}
+              ))}
+          </div>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ export const FilterList: FC<{
 
   return (
     <>
-      <label htmlFor="filter" className="form-label h4 mt-2">
+      <label htmlFor="filter" className="form-label h4 mt-2 mx-2 ">
         Filter:
       </label>
       <input

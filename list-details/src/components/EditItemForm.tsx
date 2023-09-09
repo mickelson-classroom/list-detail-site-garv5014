@@ -167,12 +167,12 @@ export const EditItemForm: FC<{
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary ">
+              <button type="submit" className="btn btn-success ">
                 Update
               </button>
             </form>
             <button
-              className="btn btn-primary mt-4 mb-4 col"
+              className="btn btn-success mt-4 mb-4 col"
               onClick={() => {
                 toggleEdit();
               }}
