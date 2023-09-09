@@ -14,7 +14,7 @@ export const AddItemModal: FC<{ handleAdd: (item: IListItem) => void }> = ({
         data-bs-toggle="modal"
         data-bs-target="#addItemModal"
       >
-        <AddIcon />
+        Add Item:<AddIcon /> 
       </button>
       <div
         className="modal fade"

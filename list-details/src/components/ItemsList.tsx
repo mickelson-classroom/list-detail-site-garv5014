@@ -7,6 +7,7 @@ export const ItemsList: FC<{
 }> = ({ list, handleClick }) => {
   return (
     <div className="container mt-4">
+      <h2 className="text-center">Tasks</h2>
       {list.map((item: IListItem) => (
         <div className="row mb-4">
           <div
