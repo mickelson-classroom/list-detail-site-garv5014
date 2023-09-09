@@ -7,17 +7,35 @@ import IListItem from "../interfaces/IListItem";
 import { AddItemModal } from "./AddItemModal";
 
 export const MasterList = () => {
-  let i = [
+  const genericItem = {
+    name: "",
+    details: "",
+    estHrs: 0,
+    dateCreated: "",
+    dateDue: "",
+    isUrgent: false,
+    owners: [],
+  };
+
+  const i = [
     {
       id: crypto.randomUUID(),
       name: "Item 1",
       details: "an example Item",
+      estHrs: 0,
+      dateCreated: "",
+      dateDue: "",
+      isUrgent: false,
       owners: ["owner 1", "owner 2"],
     },
     {
       id: crypto.randomUUID(),
       name: "Item 2",
       details: "This is an example Item",
+      estHrs: 0,
+      dateCreated: "",
+      dateDue: "",
+      isUrgent: false,
       owners: ["owner 1", "owner 2"],
     },
   ];
@@ -35,9 +53,7 @@ export const MasterList = () => {
     setFilterStr(targteStr);
     setDetailItem({
       id: crypto.randomUUID(),
-      name: "",
-      details: "",
-      owners: [],
+      ...genericItem,
     });
   };
 
@@ -48,15 +64,14 @@ export const MasterList = () => {
     setItems(newList);
     setDetailItem({
       id: crypto.randomUUID(),
-      name: "",
-      details: "",
-      owners: [],
+      ...genericItem,
     });
   };
 
   const handleAddItem = (item: IListItem) => {
     if (item?.name) {
       setItems([...items, { ...item, id: crypto.randomUUID() }]);
+      console.log(items);
     } else {
       alert("Please enter a name for the item");
     }
@@ -68,6 +83,10 @@ export const MasterList = () => {
         id: detailItem.id,
         name: detailItem.name,
         details: detailItem.details,
+        estHrs: detailItem.estHrs,
+        dateCreated: detailItem.dateCreated,
+        dateDue: detailItem.dateDue,
+        isUrgent: detailItem.isUrgent,
         owners: [...detailItem.owners, owner],
       };
       setItems([
