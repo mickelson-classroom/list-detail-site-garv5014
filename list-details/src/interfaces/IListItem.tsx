@@ -1,10 +1,10 @@
 export default interface IListItem {
   id: string;
-  name: string;
-  details: string;
-  estHrs: number;
-  dateCreated: string;
-  dateDue: string;
+  Name: string;
+  Details: string;
+  "Est Hrs": number;
+  "Date Created": string;
+  "Due Date": string;
   isUrgent: boolean;
   owners: string[];
 }

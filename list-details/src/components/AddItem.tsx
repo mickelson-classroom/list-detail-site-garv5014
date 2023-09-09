@@ -10,7 +10,6 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   };
 
   const handleChange = (value: string | boolean, name: string) => {
-    console.log("here is the value", value);
     setItemInfo((prevState) => {
       return {
         ...prevState,
@@ -21,12 +20,12 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
 
   const [itemInfo, setItemInfo] = useState<IListItem>({
     id: crypto.randomUUID(),
-    name: "",
-    details: "",
+    Name: "",
+    Details: "",
     owners: [],
-    estHrs: 0,
-    dateCreated: "",
-    dateDue: "",
+    "Est Hrs": 0,
+    "Date Created": "",
+    "Due Date": "",
     isUrgent: false,
   });
   return (
@@ -39,9 +38,9 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           type="text"
           name="itemName"
           className="form-control"
-          value={itemInfo?.name}
+          value={itemInfo?.Name}
           placeholder="Name"
-          onChange={(e) => handleChange(e.target.value, "name")}
+          onChange={(e) => handleChange(e.target.value, "Name")}
           required
         />
 
@@ -52,47 +51,47 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           type="text"
           name="itemDetails"
           className="form-control mb-4"
-          value={itemInfo?.details}
+          value={itemInfo?.Details}
           placeholder="Details"
-          onChange={(e) => handleChange(e.target.value, "details")}
+          onChange={(e) => handleChange(e.target.value, "Details")}
           required
         />
 
-        <label htmlFor="estHrs" className="form-label h4 mt-2">
+        <label htmlFor="Est_Hrs" className="form-label h4 mt-2">
           Estimated Hours:
         </label>
         <input
           type="number"
-          name="estHrs"
+          name="Est_Hrs"
           className="form-control mb-4"
-          value={itemInfo?.estHrs}
+          value={itemInfo?.["Est Hrs"]}
           placeholder="Estimated Hours"
-          onChange={(e) => handleChange(e.target.value, "estHrs")}
+          onChange={(e) => handleChange(e.target.value, "Est Hrs")}
           required
         />
 
-        <label htmlFor="dateCreated" className="form-label h4 mt-2">
+        <label htmlFor="Date Created" className="form-label h4 mt-2">
           Date Created:
         </label>
         <input
           type="date"
-          name="dateCreated"
+          name="Date Created"
           className="form-control mb-4"
-          value={itemInfo?.dateCreated}
+          value={itemInfo?.["Date Created"]}
           placeholder="Date Created"
-          onChange={(e) => handleChange(e.target.value, "dateCreated")}
+          onChange={(e) => handleChange(e.target.value, "Date Created")}
         />
 
-        <label htmlFor="dateDue" className="form-label h4 mt-2">
+        <label htmlFor="Due_Date " className="form-label h4 mt-2">
           Date Due:
         </label>
         <input
           type="date"
-          name="dateDue"
+          name="Due_Date "
           className="form-control mb-4"
-          value={itemInfo?.dateDue}
+          value={itemInfo?.["Due Date"]}
           placeholder="Date Due"
-          onChange={(e) => handleChange(e.target.value, "dateDue")}
+          onChange={(e) => handleChange(e.target.value, "Due Date")}
           required
         />
         <div className="form-check form-switch">

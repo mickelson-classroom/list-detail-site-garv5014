@@ -8,11 +8,11 @@ import { AddItemModal } from "./AddItemModal";
 
 export const MasterList = () => {
   const genericItem = {
-    name: "",
-    details: "",
-    estHrs: 0,
-    dateCreated: "",
-    dateDue: "",
+    Name: "",
+    Details: "",
+    "Est Hrs": 0,
+    "Date Created": "",
+    "Due Date": "",
     isUrgent: false,
     owners: [],
   };
@@ -20,21 +20,21 @@ export const MasterList = () => {
   const i = [
     {
       id: crypto.randomUUID(),
-      name: "Item 1",
-      details: "an example Item",
-      estHrs: 0,
-      dateCreated: "",
-      dateDue: "",
+      Name: "Item 1",
+      Details: "an example Item",
+      "Est Hrs": 0,
+      "Date Created": new Date(Date.now()).toDateString(),
+      "Due Date": new Date(Date.now()).toDateString(),
       isUrgent: false,
       owners: ["owner 1", "owner 2"],
     },
     {
       id: crypto.randomUUID(),
-      name: "Item 2",
-      details: "This is an example Item",
-      estHrs: 0,
-      dateCreated: "",
-      dateDue: "",
+      Name: "Item 2",
+      Details: "This is an example Item",
+      "Est Hrs": 0,
+      "Date Created": "",
+      "Due Date": "",
       isUrgent: false,
       owners: ["owner 1", "owner 2"],
     },
@@ -69,9 +69,8 @@ export const MasterList = () => {
   };
 
   const handleAddItem = (item: IListItem) => {
-    if (item?.name) {
+    if (item?.Name) {
       setItems([...items, { ...item, id: crypto.randomUUID() }]);
-      console.log(items);
     } else {
       alert("Please enter a name for the item");
     }
@@ -81,11 +80,11 @@ export const MasterList = () => {
     if (owner) {
       const item = {
         id: detailItem.id,
-        name: detailItem.name,
-        details: detailItem.details,
-        estHrs: detailItem.estHrs,
-        dateCreated: detailItem.dateCreated,
-        dateDue: detailItem.dateDue,
+        Name: detailItem.Name,
+        Details: detailItem.Details,
+        "Est Hrs": detailItem?.["Est Hrs"],
+        "Date Created": detailItem?.["Date Created"],
+        "Due Date": detailItem?.["Due Date"],
         isUrgent: detailItem.isUrgent,
         owners: [...detailItem.owners, owner],
       };
@@ -104,7 +103,7 @@ export const MasterList = () => {
   useEffect(() => {
     setFilteredItems(
       items.filter((item) => {
-        return item.name.toLowerCase().includes(filterStr.toLowerCase());
+        return item.Name.toLowerCase().includes(filterStr.toLowerCase());
       })
     );
   }, [items, filterStr]);

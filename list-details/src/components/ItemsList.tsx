@@ -17,7 +17,7 @@ export const ItemsList: FC<{
               handleClick(item);
             }}
           >
-            {item.name}
+            {item.Name}
           </div>
         </div>
       ))}
