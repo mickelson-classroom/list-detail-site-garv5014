@@ -11,7 +11,7 @@ export const ItemsList: FC<{
       {list.map((item: IListItem) => (
         <div className="row mb-4">
           <div
-            className="btn btn-outline-primary"
+            className={`btn btn-outline-primary ${item.isUrgent && "bg-danger"}`}
             key={item.id}
             onClick={() => {
               handleClick(item);

@@ -71,8 +71,6 @@ export const MasterList = () => {
   const handleAddItem = (item: IListItem) => {
     if (item?.Name) {
       setItems([...items, { ...item, id: crypto.randomUUID() }]);
-    } else {
-      alert("Please enter a name for the item");
     }
   };
 

@@ -6,6 +6,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
 }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     handleAdd(itemInfo);
   };
 
@@ -30,77 +31,118 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   });
   return (
     <div className="row">
-      <form onSubmit={handleSubmit} className="form">
-        <label htmlFor="Item Name" className="form-label h4 mt-2">
-          Name
-        </label>
-        <input
-          type="text"
-          name="itemName"
-          className="form-control"
-          value={itemInfo?.Name}
-          placeholder="Name"
-          onChange={(e) => handleChange(e.target.value, "Name")}
-          required
-        />
+      <form
+        onSubmit={handleSubmit}
+        className="form needs-validation"
+        noValidate
+      >
+        <div>
+          <label htmlFor="Item_Name" className="form-label h4 mt-2">
+            Name
+          </label>
+          <input
+            type="text"
+            name="Item_Name"
+            className={`form-control ${
+              itemInfo?.Name ? "is-valid" : "is-invalid"
+            }`}
+            value={itemInfo?.Name}
+            placeholder="Name"
+            onChange={(e) => handleChange(e.target.value, "Name")}
+            required
+          />
+          <div className="invalid-feedback">Please enter a valid name.</div>
+          <div className="valid-feedback">Good job</div>
+        </div>
 
-        <label htmlFor="Item Details" className="form-label h4 mt-2">
-          Details
-        </label>
-        <input
-          type="text"
-          name="itemDetails"
-          className="form-control mb-4"
-          value={itemInfo?.Details}
-          placeholder="Details"
-          onChange={(e) => handleChange(e.target.value, "Details")}
-          required
-        />
+        <div>
+          <label htmlFor="Item_Details" className="form-label h4 mt-2">
+            Details
+          </label>
+          <input
+            type="text"
+            id="Item_Details"
+            className={`form-control mb-4 ${
+              itemInfo?.Details ? "is-valid" : "is-invalid"
+            }`}
+            value={itemInfo?.Details}
+            placeholder="Details"
+            onChange={(e) => handleChange(e.target.value, "Details")}
+          />
+          <div className="valid-feedback">Word! Nice!</div>
+          <div className="invalid-feedback"> This field is required</div>
+        </div>
 
-        <label htmlFor="Est_Hrs" className="form-label h4 mt-2">
-          Estimated Hours:
-        </label>
-        <input
-          type="number"
-          name="Est_Hrs"
-          className="form-control mb-4"
-          value={itemInfo?.["Est Hrs"]}
-          placeholder="Estimated Hours"
-          onChange={(e) => handleChange(e.target.value, "Est Hrs")}
-          required
-        />
+        <div>
+          <label htmlFor="Est_Hrs" className="form-label h4 mt-2">
+            Estimated Hours:
+          </label>
+          <input
+            type="number"
+            id="Est_Hrs"
+            className={`form-control mb-4 ${
+              itemInfo?.["Est Hrs"] > 0 ? "is-valid" : "is-invalid"
+            }`}
+            value={itemInfo?.["Est Hrs"]}
+            placeholder="Estimated Hours"
+            onChange={(e) => handleChange(e.target.value, "Est Hrs")}
+            required
+          />
+          <div className="invalid-feedback">
+            Please enter a valid number great then 0
+          </div>
+        </div>
 
-        <label htmlFor="Date Created" className="form-label h4 mt-2">
-          Date Created:
-        </label>
-        <input
-          type="date"
-          name="Date Created"
-          className="form-control mb-4"
-          value={itemInfo?.["Date Created"]}
-          placeholder="Date Created"
-          onChange={(e) => handleChange(e.target.value, "Date Created")}
-        />
+        <div>
+          <label htmlFor="Date_Created" className="form-label h4 mt-2">
+            Date Created:
+          </label>
+          <input
+            type="date"
+            id="Date_Created"
+            className={`form-control mb-4 ${
+              itemInfo?.["Date Created"] > Date.now().toLocaleString()
+                ? "is-valid"
+                : "is-invalid"
+            }`}
+            value={itemInfo?.["Date Created"]}
+            placeholder="Date Created"
+            onChange={(e) => handleChange(e.target.value, "Date Created")}
+          />
+          <div className="invalid-feedback">
+            Please enter a date after today
+          </div>
+        </div>
 
-        <label htmlFor="Due_Date " className="form-label h4 mt-2">
-          Date Due:
-        </label>
-        <input
-          type="date"
-          name="Due_Date "
-          className="form-control mb-4"
-          value={itemInfo?.["Due Date"]}
-          placeholder="Date Due"
-          onChange={(e) => handleChange(e.target.value, "Due Date")}
-          required
-        />
+        <div>
+          <label htmlFor="Due_Date " className="form-label h4 mt-2">
+            Date Due:
+          </label>
+          <input
+            type="date"
+            id="Due_Date "
+            className={`form-control mb-4 ${
+              itemInfo?.["Due Date"] > Date.now().toLocaleString()
+                ? "is-valid"
+                : "is-invalid"
+            }`}
+            value={itemInfo?.["Due Date"]}
+            placeholder="Date Due"
+            onChange={(e) => handleChange(e.target.value, "Due Date")}
+            required
+          />
+          <div className="invalid-feedback">
+            Please enter a date after today
+          </div>
+        </div>
+
         <div className="form-check form-switch">
           <label htmlFor="isUrgent" className="form-label h4 my-2">
             Urgent
           </label>
           <input
             type="checkbox"
-            name="isUrgent"
+            id="isUrgent"
             role="switch"
             className="form-check-input mt-3"
             onChange={(e) => handleChange(e.target.checked, "isUrgent")}
