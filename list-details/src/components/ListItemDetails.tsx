@@ -13,15 +13,10 @@ export const ListItemDetails: FC<{
     targetItem?.owners || []
   );
 
-  const [edit, setEdit] = useState<boolean>(false);
-
-  useEffect(() => {
-    setEdit(!edit);
-  }, [edit]);
-
   useEffect(() => {
     setItemOwners(targetItem?.owners || []);
   }, [targetItem]);
+
   return (
     <div className="container">
       <div className="row justify-content-evenly">

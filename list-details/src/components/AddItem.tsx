@@ -1,5 +1,6 @@
 import { useState, FC } from "react";
 import IListItem from "../interfaces/IListItem";
+import { CustomTextInput } from "./CustomTextInput";
 
 export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   handleAdd,
@@ -8,9 +9,20 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     e.preventDefault();
 
     handleAdd(itemInfo);
+    setItemInfo({
+      id: crypto.randomUUID(),
+      Name: "",
+      Details: "",
+      owners: [],
+      "Est Hrs": 0,
+      "Date Created": "",
+      "Due Date": "",
+      isUrgent: false,
+    });
   };
 
   const handleChange = (value: string | boolean, name: string) => {
+    console.log(value, name);
     setItemInfo((prevState) => {
       return {
         ...prevState,
@@ -29,6 +41,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     "Due Date": "",
     isUrgent: false,
   });
+
   return (
     <div className="row">
       <form
@@ -36,42 +49,29 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
         className="form needs-validation"
         noValidate
       >
-        <div>
-          <label htmlFor="Item_Name" className="form-label h4 mt-2">
-            Name
-          </label>
-          <input
-            type="text"
-            name="Item_Name"
-            className={`form-control ${
-              itemInfo?.Name ? "is-valid" : "is-invalid"
-            }`}
-            value={itemInfo?.Name}
-            placeholder="Name"
-            onChange={(e) => handleChange(e.target.value, "Name")}
-            required
-          />
-          <div className="invalid-feedback">Please enter a valid name.</div>
-          <div className="valid-feedback">Good job</div>
-        </div>
+        <CustomTextInput
+          validationCondition={(value: string) => value.length !== 0}
+          label={"Name"}
+          forHtml={"Item_Name"}
+          handleParentChange={(newValue: string) =>
+            handleChange(newValue, "Name")
+          }
+          validFeedback="Looks good!"
+          invalidFeedback="Please enter a name"
+        />
 
-        <div>
-          <label htmlFor="Item_Details" className="form-label h4 mt-2">
-            Details
-          </label>
-          <input
-            type="text"
-            id="Item_Details"
-            className={`form-control mb-4 ${
-              itemInfo?.Details ? "is-valid" : "is-invalid"
-            }`}
-            value={itemInfo?.Details}
-            placeholder="Details"
-            onChange={(e) => handleChange(e.target.value, "Details")}
-          />
-          <div className="valid-feedback">Word! Nice!</div>
-          <div className="invalid-feedback"> This field is required</div>
-        </div>
+        <CustomTextInput
+          validationCondition={(value: string) => value.length !== 0}
+          label={"Details"}
+          forHtml={"Item_Details"}
+          handleParentChange={(newValue: string) =>
+            handleChange(newValue, "Details")
+          }
+          validFeedback="Looks good!"
+          invalidFeedback="Please enter some item details"
+        />
+
+
 
         <div>
           <label htmlFor="Est_Hrs" className="form-label h4 mt-2">
@@ -92,7 +92,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
             Please enter a valid number great then 0
           </div>
         </div>
-
+        
         <div>
           <label htmlFor="Date_Created" className="form-label h4 mt-2">
             Date Created:
