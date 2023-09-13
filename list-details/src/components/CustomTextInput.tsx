@@ -26,8 +26,8 @@ export const CustomTextInput: FC<{
   };
 
   return (
-    <div className={`mb-3 h4 mt-2`}>
-      <label htmlFor={`${forHtml}`} className="form-label">
+    <div>
+      <label htmlFor={`${forHtml}`} className="form-label h4 mt-2">
         {label}
       </label>
       <input
