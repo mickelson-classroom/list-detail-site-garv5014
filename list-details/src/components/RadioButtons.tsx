@@ -1,13 +1,14 @@
 import React, { FC } from "react";
 
 const RadioButton: FC<{
-  options: [{ value: any; label: string }];
+  options: Array<{ value: any; label: string }>;
   selectedOption: string;
-  onChange: () => void;
-}> = ({ options, selectedOption, onChange }) => {
+  onChange: (newValue: string) => void;
+  label: string;
+}> = ({ options, selectedOption, onChange, label }) => {
   return (
     <div>
-      <label>Select an option:</label>
+      <label className="h3">{label}</label>
       <div>
         {options.map((option) => (
           <div key={option.value} className="form-check">
@@ -18,7 +19,9 @@ const RadioButton: FC<{
               id={option.value}
               value={option.value}
               checked={selectedOption === option.value}
-              onChange={onChange}
+              onChange={(e) => {
+                onChange(e.target.value);
+              }}
             />
             <label className="form-check-label" htmlFor={option.value}>
               {option.label}

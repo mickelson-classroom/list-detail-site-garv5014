@@ -1,8 +1,9 @@
 import { useState, FC } from "react";
 import IListItem from "../interfaces/IListItem";
 import { CustomTextInput } from "./CustomTextInput";
-import { Select } from "@mui/material";
+import { Radio, Select } from "@mui/material";
 import SelectDropdown from "./SelectDropdown";
+import RadioButton from "./RadioButtons";
 
 export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   handleAdd,
@@ -46,11 +47,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
 
   return (
     <div className="row">
-      <form
-        onSubmit={handleSubmit}
-        className="form needs-validation"
-        noValidate
-      >
+      <form onSubmit={handleSubmit} className="form needs-validation">
         <CustomTextInput
           validationCondition={(value: string) => value.length !== 0}
           label={"Name"}
@@ -60,6 +57,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           }
           validFeedback="Looks good!"
           invalidFeedback="Please enter a name"
+          isRequired={true}
         />
 
         <CustomTextInput
@@ -101,6 +99,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
             value={itemInfo?.["Date Created"]}
             placeholder="Date Created"
             onChange={(e) => handleChange(e.target.value, "Date Created")}
+            required
           />
           <div className="invalid-feedback">
             Please enter a date after today
@@ -129,20 +128,19 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           </div>
         </div>
 
-        <div className="form-check form-switch">
-          <label htmlFor="isUrgent" className="form-label h4 my-2">
-            Urgent
-          </label>
-          <input
-            type="checkbox"
-            id="isUrgent"
-            role="switch"
-            className="form-check-input mt-3"
-            onChange={(e) => handleChange(e.target.checked, "isUrgent")}
-          />
-        </div>
+        <RadioButton
+          options={[
+            { value: "true", label: "Yes" },
+            { value: "false", label: "No" },
+          ]}
+          selectedOption={itemInfo.isUrgent.toString()}
+          onChange={(newValue: string) => {
+            handleChange(newValue, "isUrgent");
+          }}
+          label={"Is This Urgent?"}
+        />
 
-        <button type="submit" className="btn btn-primary ">
+        <button type="submit" className="btn btn-primary my-2">
           Add
         </button>
       </form>

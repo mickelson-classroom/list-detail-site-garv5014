@@ -7,6 +7,7 @@ export const CustomTextInput: FC<{
   invalidFeedback?: string;
   validFeedback?: string;
   handleParentChange: (newValue: string) => void;
+  isRequired?: boolean;
 }> = ({
   validationCondition,
   label,
@@ -14,6 +15,7 @@ export const CustomTextInput: FC<{
   validFeedback,
   invalidFeedback,
   handleParentChange,
+  isRequired,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -39,6 +41,7 @@ export const CustomTextInput: FC<{
           e.preventDefault();
           handleChange(e.target.value);
         }}
+        required={isRequired}
       />
       {invalidFeedback && (
         <div className="invalid-feedback">{invalidFeedback}</div>
