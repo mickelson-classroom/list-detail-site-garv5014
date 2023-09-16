@@ -1,6 +1,8 @@
 import { useState, FC } from "react";
 import IListItem from "../interfaces/IListItem";
 import { CustomTextInput } from "./CustomTextInput";
+import { Select } from "@mui/material";
+import SelectDropdown from "./SelectDropdown";
 
 export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   handleAdd,
@@ -14,7 +16,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
       Name: "",
       Details: "",
       owners: [],
-      "Est Hrs": 0,
+      "Est Hrs": "",
       "Date Created": "",
       "Due Date": "",
       isUrgent: false,
@@ -36,7 +38,7 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
     Name: "",
     Details: "",
     owners: [],
-    "Est Hrs": 0,
+    "Est Hrs": "",
     "Date Created": "",
     "Due Date": "",
     isUrgent: false,
@@ -71,28 +73,19 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
           invalidFeedback="Please enter some item details"
         />
 
+        <SelectDropdown
+          options={[
+            { value: "1", label: "1" },
+            { value: "2", label: "2" },
+            { value: "3", label: "3" },
+            { value: "4", label: "4" },
+          ]}
+          value={itemInfo?.["Est Hrs"]}
+          onChange={(newValue) => {
+            handleChange(newValue, "Est Hrs");
+          }}
+        />
 
-
-        <div>
-          <label htmlFor="Est_Hrs" className="form-label h4 mt-2">
-            Estimated Hours:
-          </label>
-          <input
-            type="number"
-            id="Est_Hrs"
-            className={`form-control mb-4 ${
-              itemInfo?.["Est Hrs"] > 0 ? "is-valid" : "is-invalid"
-            }`}
-            value={itemInfo?.["Est Hrs"]}
-            placeholder="Estimated Hours"
-            onChange={(e) => handleChange(e.target.value, "Est Hrs")}
-            required
-          />
-          <div className="invalid-feedback">
-            Please enter a valid number great then 0
-          </div>
-        </div>
-        
         <div>
           <label htmlFor="Date_Created" className="form-label h4 mt-2">
             Date Created:

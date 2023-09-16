@@ -99,7 +99,7 @@ export const EditItemForm: FC<{
                   type="number"
                   id="Est_Hrs"
                   className={`form-control mb-4 ${
-                    itemInfo?.["Est Hrs"] > 0 ? "is-valid" : "is-invalid"
+                    itemInfo?.["Est Hrs"] > '0' ? "is-valid" : "is-invalid"
                   }`}
                   value={itemInfo?.["Est Hrs"]}
                   placeholder="Estimated Hours"
