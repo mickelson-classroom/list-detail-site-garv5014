@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 
 export const CustomTextInput: FC<{
   validationCondition: (value: string) => boolean;
@@ -8,6 +8,7 @@ export const CustomTextInput: FC<{
   validFeedback?: string;
   handleParentChange: (newValue: string) => void;
   isRequired?: boolean;
+  startingValue?: string;
 }> = ({
   validationCondition,
   label,
@@ -16,9 +17,10 @@ export const CustomTextInput: FC<{
   invalidFeedback,
   handleParentChange,
   isRequired,
+  startingValue,
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [isValid, setIsValid] = useState(false);
+  const [inputValue, setInputValue] = useState(startingValue);
+  const [isValid, setIsValid] = useState(validationCondition(startingValue || ""));
 
   const handleChange = (newValue: string) => {
     setInputValue(newValue);

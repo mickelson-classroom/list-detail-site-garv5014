@@ -24,8 +24,8 @@ export const MasterList = () => {
       Name: "Task 1",
       Details: "an example Item",
       "Est Hrs": "",
-      "Date Created": new Date(Date.now()).toDateString(),
-      "Due Date": new Date(Date.now()).toDateString(),
+      "Date Created": new Date().toDateString(),
+      "Due Date": new Date().toDateString(),
       isUrgent: false,
       owners: ["owner 1", "owner 2"],
     },
@@ -48,6 +48,7 @@ export const MasterList = () => {
   const [editCurrentItem, setEditCurrentItem] = useState<boolean>(false);
 
   const handleListClick = (item: IListItem) => {
+    if (editCurrentItem) { setEditCurrentItem(false);}
     setDetailItem(item);
   };
 
@@ -59,8 +60,8 @@ export const MasterList = () => {
       item,
     ]);
     setDetailItem(item);
-    setEditCurrentItem(!editCurrentItem);
-  };
+    toggleEdit();
+    };
 
   const handleOnFilterChange = (targteStr: string) => {
     setFilterStr(targteStr);

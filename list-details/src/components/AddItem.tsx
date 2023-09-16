@@ -25,7 +25,6 @@ export const AddItem: FC<{ handleAdd: (item: IListItem) => void }> = ({
   };
 
   const handleChange = (value: string | boolean, name: string) => {
-    console.log(value, name);
     setItemInfo((prevState) => {
       return {
         ...prevState,
